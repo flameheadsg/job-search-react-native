@@ -5,6 +5,11 @@ import { Button } from 'react-native-elements';
 import * as actions from '../actions';
 
 class Settings extends Component {
+  clear = () => {
+    this.props.clearJobs();
+    this.props.navigation.navigate('map');
+  };
+
   render() {
     return (
       <View style={{ marginTop: 25 }}>
@@ -13,7 +18,7 @@ class Settings extends Component {
           large
           icon={{ name: 'delete-forever' }}
           backgroundColor="#F44336"
-          onPress={this.props.clearJobs}
+          onPress={this.clear}
         />
       </View>
     );
