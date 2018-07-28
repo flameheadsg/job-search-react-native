@@ -2,7 +2,9 @@ import axios from 'axios';
 import reverseGeoCode from 'latlng-to-zip';
 
 import {
-  FETCH_JOBS
+  FETCH_JOBS,
+  SAVE_JOB,
+  CLEAR_JOBS
 } from './types';
 
 const URL = 'https://jobs.github.com/positions.json?';
@@ -24,4 +26,15 @@ export const fetchJobs = ({
   } catch (e) {
     console.log(e);
   }
+};
+
+export const saveJob = (job) => {
+  return {
+    type: SAVE_JOB,
+    payload: job
+  };
+};
+
+export const clearJobs = () => {
+  return { type: CLEAR_JOBS };
 };

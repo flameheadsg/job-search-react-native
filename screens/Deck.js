@@ -1,11 +1,19 @@
 import React, { Component } from 'react';
 import { View, Text, Image } from 'react-native';
 import { connect } from 'react-redux';
-import { Card, Button } from 'react-native-elements';
+import { Card, Button, Icon } from 'react-native-elements';
+import * as actions from '../actions';
 
 import Swipe from '../components/Swipe';
 
 class Deck extends Component {
+  static navigationOptions = {
+    title: 'Jobs',
+    tabBarIcon: ({ tintColor }) => {
+      return <Icon name="description" size={30} color={tintColor} />;
+    }
+  }
+
   renderCard(job) {
     return (
       <Card title={job.title}>
@@ -26,18 +34,31 @@ class Deck extends Component {
           </Text>
         </View>
         <View>
-          <Text>{job.created_at}</Text>
+          <Text
+            style={{
+              marginBottom: 5
+            }}
+          >
+            {job.location}
+          </Text>
         </View>
         <View>
-          <Text>{job.url}</Text>
+          <Text>{job.created_at}</Text>
         </View>
       </Card>
     );
   }
 
-  renderNoMoreCards() {
+  renderNoMoreCards = () => {
     return (
-      <Card title="No more jobs">
+      <Card style={{ marginTop: 25 }} title="No More Jobs">
+        <Button
+          title="Back to Map"
+          large
+          icon={{ name: 'my-location' }}
+          backgroundColor="#03A9F4"
+          onPress={() => this.props.navigation.navigate('map')}
+        />
       </Card>
     );
   }
@@ -50,6 +71,7 @@ class Deck extends Component {
           renderCard={this.renderCard}
           renderNoMoreCards={this.renderNoMoreCards}
           keyProp="id"
+          onSwipeRight={job => this.props.saveJob(job)}
         />
       </View>
     );
@@ -67,4 +89,4 @@ const styles = {
   }
 };
 
-export default connect(mapStateToProps)(Deck);
+export default connect(mapStateToProps, actions)(Deck);

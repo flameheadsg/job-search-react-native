@@ -23,6 +23,10 @@ export default class App extends Component {
           review: Review,
           settings: Settings
         })
+      }, {
+        tabBarOptions: {
+            labelStyle: { fontSize: 15 }
+          }
       })
     }, {
       navigationOptions: {
