@@ -28,6 +28,8 @@ export default class App extends Component {
           settings: Settings
         })
       }, {
+        tabBarPosition: 'bottom',
+        swipeEnabled: false,
         tabBarOptions: {
             labelStyle: { fontSize: 15 }
           }
